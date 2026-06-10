@@ -1,0 +1,142 @@
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+    background: #120C10;
+    color: #F5DDD0;
+  }
+
+  input, textarea, button {
+    font-family: inherit;
+  }
+}
+@layer components {
+  .screen {
+    @apply min-h-screen pb-24 relative z-10;
+    animation: fadeSlideUp 0.3s ease forwards;
+  }
+
+  .blob {
+    @apply fixed rounded-full pointer-events-none z-0;
+    filter: blur(60px);
+    opacity: 0.22;
+  }
+
+  .card {
+  @apply border rounded-3xl;
+  background: #1A1014;
+  border-color: #2D1820;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.btn-primary {
+  @apply w-full font-bold text-[15px] py-4 rounded-[18px]
+         active:scale-[0.97] transition-transform cursor-pointer border-none;
+  background: #D4785A;
+  color: white;
+  box-shadow: 0 6px 20px rgba(212,120,90,0.25);
+}
+
+.btn-ghost {
+  @apply w-full font-semibold text-[14px] py-[14px]
+         rounded-[18px] active:scale-[0.97] transition-transform cursor-pointer;
+  background: transparent;
+  color: #A67868;
+  border: 1.5px solid #2D1820;
+}
+
+  .section-title {
+    @apply font-display text-[18px] text-hum-brown italic px-6 pt-6 pb-3;
+  }
+
+  .nav-label {
+    @apply text-[10px] font-bold text-hum-muted;
+  }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hide scrollbars on scroll containers */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Safe area padding for iOS */
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom, 20px); }
+
+/* Reminder card entrance */
+.reminder-item {
+  animation: slideUp 0.3s ease forwards;
+}
+
+/* Checkbox pop */
+.checkbox-pop {
+  animation: pop 0.2s ease forwards;
+}
+
+/* Confetti burst when completing */
+@keyframes confettiBurst {
+  0%   { transform: scale(0) rotate(0deg); opacity: 1; }
+  100% { transform: scale(2.5) rotate(180deg); opacity: 0; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25%       { transform: rotate(-8deg); }
+  75%       { transform: rotate(8deg); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(20px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(-3deg); }
+  50%       { transform: translateY(-10px) rotate(3deg); }
+}
+
+@keyframes floatDelay {
+  0%, 100% { transform: translateY(0px) rotate(3deg); }
+  50%       { transform: translateY(-8px) rotate(-3deg); }
+}
+
+@keyframes pawPrint {
+  0%   { opacity: 0; transform: scale(0) rotate(-20deg); }
+  50%  { opacity: 1; transform: scale(1.2) rotate(5deg); }
+  100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  15%       { transform: scale(1.25); }
+  30%       { transform: scale(1); }
+  45%       { transform: scale(1.15); }
+  60%       { transform: scale(1); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

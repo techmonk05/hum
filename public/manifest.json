@@ -1,0 +1,14 @@
+{
+  "name": "Hum",
+  "short_name": "Hum",
+  "description": "just us 🩷",
+  "start_url": "/home",
+  "display": "standalone",
+  "background_color": "#FFF8F0",
+  "theme_color": "#D4785A",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
