@@ -216,7 +216,7 @@ export default function ProfilePage() {
           🎵 Your favourite artists
         </div>
         <div style={{ fontSize: 11, color: HUM_PALETTE.muted, fontWeight: 600, marginBottom: 14 }}>
-          Used to personalise your song of the day (up to 5)
+          Used to personalise your song of the day
         </div>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>

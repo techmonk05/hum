@@ -9,6 +9,7 @@ export default function usePushNotifications() {
     const register = async () => {
       try {
         const reg = await navigator.serviceWorker.register("/sw.js");
+        await navigator.serviceWorker.ready; 
 
         const existing = await reg.pushManager.getSubscription();
         if (existing) return; // already subscribed
