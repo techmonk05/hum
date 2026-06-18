@@ -43,26 +43,30 @@ export async function POST(req: NextRequest) {
 
   // get recipient push subscription
   const { data: sub } = await supabase
-    .from("push_subscriptions")
-    .select("*")
-    .eq("user_id", to_user_id)
-    .single();
+  .from("push_subscriptions")
+  .select("*")
+  .eq("user_id", to_user_id)
+  .single();
 
-  if (sub && sender) {
-    try {
-      const message = PING_MESSAGES[type] ?? "sent you a ping";
-      await webpush.sendNotification(
-        { endpoint: sub.endpoint, keys: { p256dh: sub.p256dh, auth: sub.auth } },
-        JSON.stringify({
-          title: `${sender.name} 🩷`,
-          body:  `${sender.name} ${message}`,
-          url:   "/home",
-        })
-      );
-    } catch (e) {
-      console.error("Push failed:", e);
-    }
+console.log("Push subscription found:", !!sub, "for user:", to_user_id);
+
+if (sub && sender) {
+  try {
+    const message = PING_MESSAGES[type] ?? "sent you a ping";
+    console.log("Attempting to send push notification...");
+    await webpush.sendNotification(
+      { endpoint: sub.endpoint, keys: { p256dh: sub.p256dh, auth: sub.auth } },
+      JSON.stringify({
+        title: `${sender.name} 🩷`,
+        body:  `${sender.name} ${message}`,
+        url:   "/home",
+      })
+    );
+    console.log("Push notification sent successfully!");
+  } catch (e) {
+    console.error("Push failed:", e);
   }
+}
 
   return NextResponse.json({ ping: data });
 }
