@@ -42,18 +42,20 @@ export async function POST(req: NextRequest) {
     .single();
 
   // get recipient push subscription
-  const { data: sub } = await supabase
+  const { data: sub, error: subError } = await supabase
   .from("push_subscriptions")
   .select("*")
   .eq("user_id", to_user_id)
   .single();
 
-console.log("Push subscription found:", !!sub, "for user:", to_user_id);
+console.log("PING DEBUG — to_user_id:", to_user_id);
+console.log("PING DEBUG — sub found:", !!sub, "error:", subError);
+console.log("PING DEBUG — sender:", sender);
 
 if (sub && sender) {
   try {
     const message = PING_MESSAGES[type] ?? "sent you a ping";
-    console.log("Attempting to send push notification...");
+    console.log("PING DEBUG — attempting webpush.sendNotification");
     await webpush.sendNotification(
       { endpoint: sub.endpoint, keys: { p256dh: sub.p256dh, auth: sub.auth } },
       JSON.stringify({
@@ -62,10 +64,12 @@ if (sub && sender) {
         url:   "/home",
       })
     );
-    console.log("Push notification sent successfully!");
+    console.log("PING DEBUG — push sent successfully!");
   } catch (e) {
-    console.error("Push failed:", e);
+    console.error("PING DEBUG — push failed:", e);
   }
+} else {
+  console.log("PING DEBUG — skipping push, sub or sender missing");
 }
 
   return NextResponse.json({ ping: data });
