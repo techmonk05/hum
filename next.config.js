@@ -5,6 +5,7 @@ const withPWA = require("next-pwa")({
   register: true,
   skipWaiting: true,
   buildExcludes: [/app-build-manifest\.json$/],
+  importScripts: ["/push-handler.js"],
 });
 
 const nextConfig = {

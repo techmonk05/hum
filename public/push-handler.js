@@ -1,24 +1,18 @@
-// public/sw.js
+// public/push-handler.js
 self.addEventListener('push', function(event) {
   if (!event.data) return;
-  
   const data = event.data.json();
-  
   event.waitUntil(
     self.registration.showNotification(data.title, {
-      body:    data.body,
-      icon:    '/icons/icon-192x192.png',
-      badge:   '/icons/icon-72x72.png',
+      body: data.body,
+      icon: '/icons/icon-192x192.png',
       vibrate: [100, 50, 100],
-      data:    { url: data.url ?? '/' },
-      actions: data.actions ?? [],
+      data: { url: data.url ?? '/' },
     })
   );
 });
 
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
-  event.waitUntil(
-    clients.openWindow(event.notification.data.url ?? '/')
-  );
+  event.waitUntil(clients.openWindow(event.notification.data.url ?? '/'));
 });
